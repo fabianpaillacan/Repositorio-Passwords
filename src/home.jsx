@@ -1,8 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Contraseña from "./Formulario";
+import Storage from "./Storage"
 
 export default function Home() {
-  const navigate = useNavigate();
+  /*const navigate = useNavigate();*/
+  const [visible, setVisible] = useState(false);
+
+  const alternarVisibilidad = () => {
+    setVisible(!visible);
+  };
 
   return (
     <>
@@ -11,14 +18,16 @@ export default function Home() {
       </div>
 
       <Contraseña />
-    <div className="flex justify-center items-center  -md mx-auto">
+
+    <div className="flex justify-center items-center -md p-4 max-w-md mx-auto">
       <button 
-        onClick={() => navigate('/ver')}
+        onClick={alternarVisibilidad}
         className="bg-green-500 text-white py-2 rounded hover:bg-blue-600 w-[415px]"
       >
-        Ver contraseñas
+       {visible ? 'Ocultar' : 'Mostrar'}
       </button>
-      </div>
+    </div>
+    <section> {visible && <Storage></Storage>}</section>
     </>
   );
 }
