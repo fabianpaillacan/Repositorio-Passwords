@@ -1,5 +1,7 @@
 // PasswordForm.jsx
 import { useState } from "react";
+import { Shield, Eye, EyeOff, Database } from "lucide-react";
+import Storage from './Storage'
 
 const campos = [
   { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
@@ -13,6 +15,12 @@ export default function PasswordForm() {
     usuario: "",
     password: ""
   });
+
+  const [visible, setVisible] = useState(false);
+
+  const alternarVisibilidad = () => {
+    setVisible(!visible);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,23 +59,41 @@ export default function PasswordForm() {
   
 
   return (
-    <div className="flex flex-col gap-4 p-4 max-w-md mx-auto">
-      {campos.map((campo) => (
-        <input
-          key={campo.id}
-          name={campo.name}
-          placeholder={campo.placeholder}
-          value={formulario[campo.name]}
-          onChange={handleChange}
-          className="p-2 border rounded"
-        />
-      ))}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    {/* Header principal con el mismo estilo */}
+    <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm border-b border-slate-600/30">
+      <div className="max-w-md mx-auto px-4 py-8 grid grid-rows-3 gap-y-3">
+        <div className="flex items-center justify-center space-x-3">
+          <div className="p-3 bg-amber-500 rounded-xl shadow-lg">
+            <Shield className="w-8 h-8 text-slate-900" />
+          </div>
+          <h1 className="text-4xl font-bold text-white">Gestor</h1>
+        </div>
+          {campos.map((campo) => (
+          <input
+            key={campo.id}
+            name={campo.name}
+            placeholder={campo.placeholder}
+            value={formulario[campo.name]}
+            onChange={handleChange}
+            className="p-2 border rounded"
+          />
+        ))}
       <button
         onClick={handleGuardar}
         className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
       >
         Guardar contraseña
       </button>
+      <button
+        onClick={alternarVisibilidad}
+        className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+      >
+        {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'}
+      </button>
+      </div>
+      <section> {visible && <Storage/>}</section>
+    </div>
     </div>
   );
 }
