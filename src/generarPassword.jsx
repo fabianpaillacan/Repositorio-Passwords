@@ -7,12 +7,18 @@ export default function Generate() {
     const letrasMinusculas = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     const numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const simbolos = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '|', '/', '?', '>', '<', '~', '`', 'ñ', 'Ñ', 'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'];
+    const todosLosCaracteres = [
+        ...letrasMayusculas,
+        ...letrasMinusculas,
+        ...numeros,
+        ...simbolos,
+      ];
     const [password, setPassword] = useState("");
 
     const generarPassword = () => {
         let cadena = "";
         for(let i = 0; i <caracteres; i++){
-            cadena += letrasMayusculas[Math.floor(Math.random() * letrasMayusculas.length)]; //funciona bien, pero la idea es mezclar todos los arrays.
+            cadena += todosLosCaracteres[Math.floor(Math.random() * todosLosCaracteres.length)]; 
         }
         setPassword(cadena);
     }
