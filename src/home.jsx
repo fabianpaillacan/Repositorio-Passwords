@@ -1,5 +1,5 @@
 
-import Contraseña from "./Formulario";
+import Formulario from "./Formulario";
 
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <>
-      <Contraseña />
+      <Formulario />
     </>
   );
 }
