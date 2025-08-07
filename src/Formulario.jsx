@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Shield, Eye, EyeOff, Database } from "lucide-react";
 import Storage from './Storage'
+import Generate from './generarPassword'
 
 const campos = [
   { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
@@ -14,12 +15,17 @@ export default function PasswordForm() {
     sitio: "",
     usuario: "",
     password: ""
-  });
+  }); 
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); //esto es para mostrar y ocultar las contraseñas
+  const [visibleGenerate, setVisibleGenerate] = useState(false); //esto es para mostrar y ocultar el boton de generar contraseña
 
   const alternarVisibilidad = () => {
     setVisible(!visible);
+  };
+
+  const alternarVisibilidadGenerate = () => {
+    setVisibleGenerate(!visibleGenerate);
   };
 
   const handleChange = (e) => {
@@ -77,8 +83,14 @@ export default function PasswordForm() {
             value={formulario[campo.name]}
             onChange={handleChange}
             className="p-2 border rounded"
-          />
-        ))}
+          />   
+        ))
+        }
+      <button 
+      onClick={alternarVisibilidadGenerate}
+      className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Generar contraseña
+      </button>
+      <section> {visibleGenerate && <Generate/>}</section>
       <button
         onClick={handleGuardar}
         className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
@@ -89,7 +101,7 @@ export default function PasswordForm() {
         onClick={alternarVisibilidad}
         className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
       >
-        {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'}
+        {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'} {/*esto es para mostrar y ocultar las contraseñas*/}
       </button>
       </div>
       <section> {visible && <Storage/>}</section>
