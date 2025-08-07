@@ -1,8 +1,8 @@
 // PasswordForm.jsx
 import { useState } from "react";
 import { Shield, Eye, EyeOff, Database } from "lucide-react";
-import Storage from './Storage'
-import Generate from './generarPassword'
+import Storage from './Storage';
+import Generate from './generarPassword';
 
 const campos = [
   { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
