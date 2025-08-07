@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X } from "lucide-react";
 
-export default function Generate() {
+export default function Generate({ onGenerar }) {
     const [caracteres, setCaracteres] = useState(8);
     const letrasMayusculas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     const letrasMinusculas = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -21,6 +21,7 @@ export default function Generate() {
             cadena += todosLosCaracteres[Math.floor(Math.random() * todosLosCaracteres.length)]; 
         }
         setPassword(cadena);
+        onGenerar(password);
     }
 
 
