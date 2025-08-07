@@ -4,13 +4,13 @@ import { Shield, Eye, EyeOff, Database } from "lucide-react";
 import Storage from './Storage';
 import Generate from './generarPassword';
 
-const campos = [
-  { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
-  { name: "usuario", placeholder: "Ingresar usuario o correo electrónico", id: 2 },
-  { name: "password", placeholder: "Ingresar la contraseña", id: 3 },
-];
-
 export default function PasswordForm() {
+  const recibirPasswordGenerada = (nuevaPassword) => {
+    setFormulario((prev) => ({
+      ...prev,
+      password: nuevaPassword
+    }));
+  };
   const [formulario, setFormulario] = useState({
     sitio: "",
     usuario: "",
@@ -74,6 +74,12 @@ export default function PasswordForm() {
             <Shield className="w-8 h-8 text-slate-900" />
           </div>
           <h1 className="text-4xl font-bold text-white">Gestor</h1>
+          </div>
+          {/*const campos = [
+  { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
+  { name: "usuario", placeholder: "Ingresar usuario o correo electrónico", id: 2 },
+  { name: "password", placeholder: "Ingresar la contraseña", id: 3 },
+]; 
         </div>
           {campos.map((campo) => (
           <input
@@ -85,12 +91,36 @@ export default function PasswordForm() {
             className="p-2 border rounded"
           />   
         ))
-        }
+        } */}
+        <input
+            key={1}
+            name={"sitio"}
+            placeholder={"Ingrese el sitio web"}
+            value={formulario.sitio}
+            onChange={handleChange}
+            className="p-2 border rounded"
+        /> 
+        <input
+            key={2}
+            name={"usuario"}
+            placeholder={"Ingrese el correo o usuario"}
+            value={formulario.usuario}
+            onChange={handleChange}
+            className="p-2 border rounded"
+        /> 
+        <input
+            key={3}
+            name={"password"}
+            placeholder={"Ingrese la contraseña o genera una"}
+            value={formulario.password}
+            onChange={handleChange}
+            className="p-2 border rounded"
+        /> 
       <button 
       onClick={alternarVisibilidadGenerate}
       className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Generar contraseña
       </button>
-      <section> {visibleGenerate && <Generate/>}</section>
+      <section> {visibleGenerate && <Generate onGenerar={recibirPasswordGenerada} />}</section>
       <button
         onClick={handleGuardar}
         className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
