@@ -12,6 +12,7 @@ export default function PasswordForm() {
     }));
   };
   const [formulario, setFormulario] = useState({
+    id: crypto.randomUUID(),
     sitio: "",
     usuario: "",
     password: ""
@@ -57,7 +58,7 @@ export default function PasswordForm() {
       }
   
       // Limpiar formulario
-      setFormulario({ sitio: "", usuario: "", password: "" });
+      setFormulario({id: crypto.randomUUID(),  sitio: "", usuario: "", password: "" });
     } catch (error) {
       console.error("❌ Error al guardar en localStorage:", error);
     }
@@ -75,23 +76,6 @@ export default function PasswordForm() {
           </div>
           <h1 className="text-4xl font-bold text-white">Gestor</h1>
           </div>
-          {/*const campos = [
-  { name: "sitio", placeholder: "Ingresar el sitio web", id: 1 },
-  { name: "usuario", placeholder: "Ingresar usuario o correo electrónico", id: 2 },
-  { name: "password", placeholder: "Ingresar la contraseña", id: 3 },
-]; 
-        </div>
-          {campos.map((campo) => (
-          <input
-            key={campo.id}
-            name={campo.name}
-            placeholder={campo.placeholder}
-            value={formulario[campo.name]}
-            onChange={handleChange}
-            className="p-2 border rounded"
-          />   
-        ))
-        } */}
         <input
             key={1}
             name={"sitio"}
