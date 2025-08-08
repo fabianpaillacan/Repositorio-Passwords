@@ -6,16 +6,27 @@ export default function Contraseña() {
   const [seleccionado, setSeleccionado] = useState(null);
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [editando, setEditando] = useState(false);
+  const [eliminar, setEliminar] = useState(false);
 
   const handleClick = (item) => {
-    if (seleccionado?.sitio === item.sitio) {
+    if (seleccionado?.id === item.id) {
       setSeleccionado(null);
       setEditando(false);
+      setEliminar(false);
     } else {
       setSeleccionado(item);
       setEditando(false);
+      setEliminar(false);
     }
     setMostrarPassword(false);
+  };
+
+  const eliminarEvento = () => {
+    const nuevosDatos = dato.filter((item) => item.id !== seleccionado.id);
+    setDato(nuevosDatos);
+    setSeleccionado(null);
+    setEliminar(false);
+    localStorage.setItem("passwords", JSON.stringify(nuevosDatos));
   };
 
   const handleInputChange = (e) => {
@@ -24,11 +35,9 @@ export default function Contraseña() {
     setSeleccionado(actualizado);
 
     const nuevosDatos = dato.map((item) =>
-      item.sitio === seleccionado.sitio ? actualizado : item
+      item.id === seleccionado.id ? actualizado : item
     );
     setDato(nuevosDatos);
-
-    // Guardar en localStorage (tu lógica original)
     localStorage.setItem("passwords", JSON.stringify(nuevosDatos));
   };
 
@@ -45,7 +54,6 @@ export default function Contraseña() {
       console.log("Objeto no encontrado en localStorage");
     }
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header elegante */}
@@ -69,7 +77,7 @@ export default function Contraseña() {
           <div
             key={index}
             className={`transform transition-all duration-200 ${
-              seleccionado?.sitio === item.sitio 
+              seleccionado?.id === item.id
                 ? 'scale-[1.02] shadow-xl' 
                 : 'hover:scale-[1.01] hover:shadow-lg'
             }`}
@@ -120,12 +128,14 @@ export default function Contraseña() {
                   <Edit3 className="w-4 h-4 " />
                 </button>
               )}
+              {!eliminar &&(
               <button
-                  onClick={() => setEditando(true)} //cambiar para eliminar
+                  onClick={() => setEliminar(true)} //cambiar para eliminar
                   className="p-2 text-slate-400 hover:text-red-700 transition-colors rounded-lg hover:bg-slate-700/30"
                 >
                   <Trash2 className="w-4 h-4 " />
                 </button>
+              )}
                 </div>
             </div>
 
@@ -219,6 +229,26 @@ export default function Contraseña() {
                 </button>
               </div>
             )}
+
+            {eliminar && (
+                 <div className="flex space-x-3 pt-2">
+                 <button
+                   onClick={eliminarEvento}
+                   className="flex-1 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-semibold py-3 px-4 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg flex items-center justify-center space-x-2"
+                 >
+                   <Check className="w-4 h-4" />
+                   <span>Eliminar</span>
+                 </button>
+                 <button
+                   onClick={() => setEliminar(false)}
+                   className="flex-1 bg-slate-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-500 transition-all flex items-center justify-center space-x-2"
+                 >
+                   <X className="w-4 h-4" />
+                   <span>Cancelar</span>
+                 </button>
+               </div>
+            )}
+
           </div>
         )}
       </div>
