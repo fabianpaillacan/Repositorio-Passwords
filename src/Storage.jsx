@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X } from "lucide-react";
+import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X, Trash2 } from "lucide-react";
 
 export default function Contraseña() {
   const [dato, setDato] = useState([]);
@@ -111,14 +111,22 @@ export default function Contraseña() {
                 <Edit3 className="w-5 h-5 text-amber-500" />
                 <span>Detalles</span>
               </h2>
+              <div className="flex justify-center">
               {!editando && (
                 <button
                   onClick={() => setEditando(true)}
-                  className="p-2 text-slate-400 hover:text-amber-500 transition-colors rounded-lg hover:bg-slate-700/30"
+                  className="p-2 text-slate-400 hover:text-amber-500 transition-colors rounded-lg hover:bg-slate-700/30 mr-4"
                 >
-                  <Edit3 className="w-4 h-4" />
+                  <Edit3 className="w-4 h-4 " />
                 </button>
               )}
+              <button
+                  onClick={() => setEditando(true)} //cambiar para eliminar
+                  className="p-2 text-slate-400 hover:text-red-700 transition-colors rounded-lg hover:bg-slate-700/30"
+                >
+                  <Trash2 className="w-4 h-4 " />
+                </button>
+                </div>
             </div>
 
             <div className="space-y-4">
