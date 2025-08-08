@@ -38,6 +38,12 @@ export default function PasswordForm() {
   };
 
   const handleGuardar = () => {
+    // Validar que todos los campos tengan contenido
+    if (!formulario.sitio.trim() || !formulario.usuario.trim() || !formulario.password.trim()) {
+      alert("⚠️ Por favor, completa todos los campos antes de guardar");
+      return;
+    }
+
     try {
       const existentes = JSON.parse(localStorage.getItem("passwords") || "[]");
       const actualizado = [...existentes, formulario];
@@ -53,12 +59,11 @@ export default function PasswordForm() {
         ultima.password === formulario.password
       ) {
         alert("✅ Guardado exitosamente");
+        // Limpiar formulario solo si se guardó correctamente
+        setFormulario({id: crypto.randomUUID(),  sitio: "", usuario: "", password: "" });
       } else {
         alert("⚠️ Algo falló al guardar");
       }
-  
-      // Limpiar formulario
-      setFormulario({id: crypto.randomUUID(),  sitio: "", usuario: "", password: "" });
     } catch (error) {
       console.error("❌ Error al guardar en localStorage:", error);
     }
@@ -83,6 +88,7 @@ export default function PasswordForm() {
             value={formulario.sitio}
             onChange={handleChange}
             className="p-2 border rounded"
+            required
         /> 
         <input
             key={2}
@@ -91,6 +97,7 @@ export default function PasswordForm() {
             value={formulario.usuario}
             onChange={handleChange}
             className="p-2 border rounded"
+            required
         /> 
         <input
             key={3}
@@ -99,6 +106,7 @@ export default function PasswordForm() {
             value={formulario.password}
             onChange={handleChange}
             className="p-2 border rounded"
+            required
         /> 
       <button 
       onClick={alternarVisibilidadGenerate}
