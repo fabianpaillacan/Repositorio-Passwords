@@ -110,7 +110,8 @@ export default function PasswordForm() {
         /> 
       <button 
       onClick={alternarVisibilidadGenerate}
-      className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Generar contraseña
+      className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      {visibleGenerate ? 'Ocultar' : 'Generar Contraseña'}
       </button>
       <section> {visibleGenerate && <Generate onGenerar={recibirPasswordGenerada} />}</section>
       <button
