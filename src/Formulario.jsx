@@ -115,13 +115,13 @@ export default function PasswordForm() {
       <section> {visibleGenerate && <Generate onGenerar={recibirPasswordGenerada} />}</section>
       <button
         onClick={handleGuardar}
-        className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        className="bg-green-500 text-white py-2 rounded hover:bg-green-800"
       >
         Guardar contraseña
       </button>
       <button
         onClick={alternarVisibilidad}
-        className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+        className="bg-yellow-500 text-white py-2 rounded hover:bg-yellow-800"
       >
         {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'} {/*esto es para mostrar y ocultar las contraseñas*/}
       </button>
