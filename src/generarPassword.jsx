@@ -29,7 +29,7 @@ export default function Generate({ onGenerar }) {
         <div className="max-w-md mx-auto px-4 py-8 grid grid-rows-3 gap-y-3 border-2 border-gray-500 rounded-md pd-2">
            <p className="text-white font-bold text-xl">Password</p> 
            <input
-            className="border-2 border-gray-300 rounded-md text-black"
+            className="border-2 border-gray-300 rounded-md bg-sky-950 text-white"
             value={password}
             readOnly
             />
