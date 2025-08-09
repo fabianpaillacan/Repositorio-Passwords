@@ -87,7 +87,7 @@ export default function PasswordForm() {
             placeholder={"Ingrese el sitio web"}
             value={formulario.sitio}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border rounded bg-sky-950 text-white"
             required
         /> 
         <input
@@ -96,7 +96,7 @@ export default function PasswordForm() {
             placeholder={"Ingrese el correo o usuario"}
             value={formulario.usuario}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border rounded bg-sky-950 text-white"
             required
         /> 
         <input
@@ -105,7 +105,7 @@ export default function PasswordForm() {
             placeholder={"Ingrese la contraseña o genera una"}
             value={formulario.password}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border rounded bg-sky-950 text-white"
             required
         /> 
       <button 
