@@ -20,7 +20,7 @@ export default function PasswordForm() {
 
   const [visible, setVisible] = useState(false); //esto es para mostrar y ocultar las contraseñas
   const [visibleGenerate, setVisibleGenerate] = useState(false); //esto es para mostrar y ocultar el boton de generar contraseña
-
+  const [visibleForm, setVisibleForm] = useState(false);
   const alternarVisibilidad = () => {
     setVisible(!visible);
   };
@@ -28,6 +28,10 @@ export default function PasswordForm() {
   const alternarVisibilidadGenerate = () => {
     setVisibleGenerate(!visibleGenerate);
   };
+
+  const alternarVisibilidadIngresarContraseña = () =>{
+    setVisibleForm(!visibleForm);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,63 +76,104 @@ export default function PasswordForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-    {/* Header principal con el mismo estilo */}
-    <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm border-b border-slate-600/30">
-      <div className="max-w-md mx-auto px-4 py-8 grid grid-rows-3 gap-y-3">
-        <div className="flex items-center justify-center space-x-3">
-          <div className="p-3 bg-amber-500 rounded-xl shadow-lg">
-            <Shield className="w-8 h-8 text-slate-900" />
+      {/* Header principal */}
+      <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm border-b border-slate-600/30">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          {/* Título y logo */}
+          <div className="flex items-center justify-center space-x-3 mb-6">
+            <div className="p-3 bg-amber-500 rounded-xl shadow-lg">
+              <Shield className="w-8 h-8 text-slate-900" />
+            </div>
+            <h1 className="text-4xl font-bold text-white">Gestor de Contraseñas</h1>
           </div>
-          <h1 className="text-4xl font-bold text-white">Gestor</h1>
+          
+          {/* Botón principal */}
+          <div className="flex justify-center mb-6">
+            <button 
+              className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition-colors duration-200 font-semibold text-lg shadow-lg" 
+              onClick={alternarVisibilidadIngresarContraseña}
+            >
+              {visibleForm ? 'Ocultar Formulario' : 'Ingresar Contraseña'}
+            </button>
           </div>
-        <input
-            key={1}
-            name={"sitio"}
-            placeholder={"Ingrese el sitio web"}
-            value={formulario.sitio}
-            onChange={handleChange}
-            className="p-2 border rounded bg-sky-950 text-white"
-            required
-        /> 
-        <input
-            key={2}
-            name={"usuario"}
-            placeholder={"Ingrese el correo o usuario"}
-            value={formulario.usuario}
-            onChange={handleChange}
-            className="p-2 border rounded bg-sky-950 text-white"
-            required
-        /> 
-        <input
-            key={3}
-            name={"password"}
-            placeholder={"Ingrese la contraseña o genera una"}
-            value={formulario.password}
-            onChange={handleChange}
-            className="p-2 border rounded bg-sky-950 text-white"
-            required
-        /> 
-      <button 
-      onClick={alternarVisibilidadGenerate}
-      className="bg-blue-500 text-white py-2 rounded hover:bg-blue-800">
-      {visibleGenerate ? 'Ocultar' : 'Generar Contraseña'}
-      </button>
-      <section> {visibleGenerate && <Generate onGenerar={recibirPasswordGenerada} />}</section>
-      <button
-        onClick={handleGuardar}
-        className="bg-green-500 text-white py-2 rounded hover:bg-green-800"
-      >
-        Guardar contraseña
-      </button>
-      <button
-        onClick={alternarVisibilidad}
-        className="bg-yellow-500 text-white py-2 rounded hover:bg-yellow-800"
-      >
-        {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'} {/*esto es para mostrar y ocultar las contraseñas*/}
-      </button>
+
+          {/* Formulario */}
+          {visibleForm && (
+            <div className="max-w-md mx-auto bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-slate-600/30 shadow-xl">
+              <h2 className="text-2xl font-bold text-white mb-4 text-center">Nueva Contraseña</h2>
+              
+              <div className="space-y-4">
+                <input
+                  name="sitio"
+                  placeholder="Ingrese el sitio web"
+                  value={formulario.sitio}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-slate-600 rounded-lg bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                /> 
+                
+                <input
+                  name="usuario"
+                  placeholder="Ingrese el correo o usuario"
+                  value={formulario.usuario}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-slate-600 rounded-lg bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                /> 
+                
+                <input
+                  name="password"
+                  placeholder="Ingrese la contraseña o genera una"
+                  value={formulario.password}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-slate-600 rounded-lg bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                /> 
+                
+                {/* Botón generar contraseña */}
+                <button 
+                  onClick={alternarVisibilidadGenerate}
+                  className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-semibold shadow-lg"
+                >
+                  {visibleGenerate ? 'Ocultar Generador' : 'Generar Contraseña'}
+                </button>
+                
+                {/* Sección del generador */}
+                {visibleGenerate && (
+                  <div className="mt-4">
+                    <Generate onGenerar={recibirPasswordGenerada} />
+                  </div>
+                )}
+                
+                {/* Botón guardar */}
+                <button
+                  onClick={handleGuardar}
+                  className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors duration-200 font-semibold shadow-lg"
+                >
+                  Guardar Contraseña
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Botón mostrar contraseñas */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={alternarVisibilidad}
+              className="bg-yellow-500 text-white py-3 px-6 rounded-lg hover:bg-yellow-600 transition-colors duration-200 font-semibold shadow-lg"
+            >
+              {visible ? 'Ocultar Contraseñas' : 'Mostrar Contraseñas'}
+            </button>
+          </div>
+        </div>
       </div>
-      <section> {visible && <Storage/>}</section>
-    </div>
+      
+      {/* Sección de almacenamiento */}
+      {visible && (
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <Storage />
+        </div>
+      )}
     </div>
   );
 }
