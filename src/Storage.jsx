@@ -11,17 +11,17 @@ export default function Contraseña() {
 
   const copiarPortapapeles = async () => {
     if (!seleccionado || !seleccionado.password) {
-      setNotificacion('No hay contraseña seleccionada para copiar.');
+      setNotificacion('El campo está vacio.');
       setTimeout(() => setNotificacion(""), 2000);
       return;
     }
     try {
       await navigator.clipboard.writeText(seleccionado.password);
-      setNotificacion('¡Contraseña copiada!');
+      setNotificacion('¡Texto Copiado!');
       setTimeout(() => setNotificacion(""), 2000);
     } catch (err) {
       console.error('Error al copiar: ', err);
-      setNotificacion('Hubo un error al copiar la contraseña.');
+      setNotificacion('Hubo un error al copiar el texto.');
       setTimeout(() => setNotificacion(""), 2000);
     }
   }
@@ -203,12 +203,13 @@ export default function Contraseña() {
                         : 'bg-slate-800/30 border-slate-600/20 cursor-default'
                     }`}
                   />
-                  <button
+                  {/*<button
+                   onClick={copiarPortapapeles}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-amber-500 transition-colors p-1 rounded"
 
                   >
                     {<Copy size={16} strokeWidth={1.5} />} 
-                  </button>
+                  </button> */}
                 </div>
               </div>
 
