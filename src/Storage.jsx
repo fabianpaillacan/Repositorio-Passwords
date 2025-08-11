@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X, Trash2 } from "lucide-react";
+import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X, Trash2, Copy } from "lucide-react";
 
 export default function Contraseña() {
   const [dato, setDato] = useState([]);
@@ -7,6 +7,16 @@ export default function Contraseña() {
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [editando, setEditando] = useState(false);
   const [eliminar, setEliminar] = useState(false);
+
+  const copiarPortapapeles = async () => {
+    try {
+      await navigator.clipboard.writeText(texto);
+      alert(`Texto "${texto}" copiado al portapapeles!`);
+    } catch (err) {
+      console.error('Error al copiar: ', err);
+      alert('Hubo un error al copiar el texto.');
+    }
+  }
 
   const handleClick = (item) => {
     if (seleccionado?.id === item.id) {
@@ -179,6 +189,12 @@ export default function Contraseña() {
                         : 'bg-slate-800/30 border-slate-600/20 cursor-default'
                     }`}
                   />
+                  <button
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-amber-500 transition-colors p-1 rounded"
+
+                  >
+                    {<Copy size={16} strokeWidth={1.5} />} 
+                  </button>
                 </div>
               </div>
 
@@ -202,9 +218,16 @@ export default function Contraseña() {
                   />
                   <button
                     onClick={() => setMostrarPassword(!mostrarPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-amber-500 transition-colors p-1 rounded"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-amber-500 transition-colors p-1 rounded  mr-8"
                   >
                     {mostrarPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                  <button
+                    onClick={copiarPortapapeles}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-amber-500 transition-colors p-1 rounded"
+
+                  >
+                    {<Copy size={16} strokeWidth={1.5} />} 
                   </button>
                 </div>
               </div>
