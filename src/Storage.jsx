@@ -9,12 +9,16 @@ export default function Contraseña() {
   const [eliminar, setEliminar] = useState(false);
 
   const copiarPortapapeles = async () => {
+    if (!seleccionado || !seleccionado.password) {
+      alert('No hay contraseña seleccionada para copiar.');
+      return;
+    }
     try {
-      await navigator.clipboard.writeText(texto);
-      alert(`Texto "${texto}" copiado al portapapeles!`);
+      await navigator.clipboard.writeText(seleccionado.password);
+      alert(`Contraseña copiada al portapapeles!`);
     } catch (err) {
       console.error('Error al copiar: ', err);
-      alert('Hubo un error al copiar el texto.');
+      alert('Hubo un error al copiar la contraseña.');
     }
   }
 
