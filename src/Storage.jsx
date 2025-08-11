@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Eye, EyeOff, Lock, User, Globe, Edit3, Check, X, Trash2, Copy } from "lucide-react";
 
 export default function Contraseña() {
+  const [notificacion, setNotificacion] = useState("");
   const [dato, setDato] = useState([]);
   const [seleccionado, setSeleccionado] = useState(null);
   const [mostrarPassword, setMostrarPassword] = useState(false);
@@ -10,15 +11,18 @@ export default function Contraseña() {
 
   const copiarPortapapeles = async () => {
     if (!seleccionado || !seleccionado.password) {
-      alert('No hay contraseña seleccionada para copiar.');
+      setNotificacion('No hay contraseña seleccionada para copiar.');
+      setTimeout(() => setNotificacion(""), 2000);
       return;
     }
     try {
       await navigator.clipboard.writeText(seleccionado.password);
-      alert(`Contraseña copiada al portapapeles!`);
+      setNotificacion('¡Contraseña copiada!');
+      setTimeout(() => setNotificacion(""), 2000);
     } catch (err) {
       console.error('Error al copiar: ', err);
-      alert('Hubo un error al copiar la contraseña.');
+      setNotificacion('Hubo un error al copiar la contraseña.');
+      setTimeout(() => setNotificacion(""), 2000);
     }
   }
 
@@ -70,6 +74,12 @@ export default function Contraseña() {
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Notificación minimalista */}
+      {notificacion && (
+        <div style={{position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: "#222", color: "#fff", padding: "8px 20px", borderRadius: "8px", fontSize: "0.95rem", boxShadow: "0 2px 8px #0002", zIndex: 9999, opacity: 0.95}}>
+          {notificacion}
+        </div>
+      )}
       {/* Header elegante */}
       <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-sm border-b border-slate-600/30">
         <div className="max-w-md mx-auto px-4 py-6">
